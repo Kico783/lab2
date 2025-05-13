@@ -8,7 +8,7 @@ def get_all():
 
 def create(data):
     rental_id = str(uuid4())
-    rental = Rental(rental_id, data['reader_id'], data['book_id'])
+    rental = Rental(rental_id, data['reader_id'], data['book_id'], data['days'])
     rentals[rental_id] = rental
     return rental.to_dict()
 
@@ -16,8 +16,7 @@ def update(rental_id, data):
     rental = rentals.get(rental_id)
     if not rental:
         return None
-    rental.reader_id = data.get('reader_id', rental.reader_id)
-    rental.book_id = data.get('book_id', rental.book_id)
+    rental.days = data.get('days', rental.days)
     return rental.to_dict()
 
 def delete(rental_id):
